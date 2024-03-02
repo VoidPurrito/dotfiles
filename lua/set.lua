@@ -17,3 +17,7 @@ vim.opt.cursorline = true
 vim.api.nvim_set_hl(0, "CursorLine", { underline = false, ctermbg = 234 })
 
 vim.opt.mouse = "nvi"
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
