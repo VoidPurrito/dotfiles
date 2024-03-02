@@ -8,7 +8,7 @@ end
 function load_bookmarks()
     if not vim.g.my_bookmarks then
         local cache_file_path = get_cache_file_path();
-        local file = assert(io.open(cache_file_path));
+        local file = io.open(cache_file_path);
         local b = {};
 
         if file then
