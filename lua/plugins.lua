@@ -5,7 +5,7 @@ return {
     { "nvim-telescope/telescope.nvim", tag = "0.", dependencies = { "nvim-lua/plenary.nvim" }, lzy = false};
 
     -- treesitter
-    { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", lazy = false };
+    { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", event = { "BufReadPre", "BufNewFile" }, lazy = false };
     { "nvim-treesitter/nvim-treesitter-context", lazy = false };
     { "nvim-treesitter/nvim-treesitter-textobjects", lazy = false };
 

@@ -11,6 +11,7 @@ vim.opt.autoindent = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.ttyfast = true
 vim.opt.wildmode = "list:longest"
+vim.opt.showmode = false
 
 vim.opt.cursorline = true
 vim.api.nvim_set_hl(0, "CursorLine", { underline = false, ctermbg = 234 })
