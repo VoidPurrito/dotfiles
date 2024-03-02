@@ -28,9 +28,18 @@ return {
             { "hrsh7th/cmp-path" };
             { "saadparwaiz1/cmp_luasnip" };
             { "hrsh7th/cmp-nvim-lsp" };
-            { "hrsh7th/cmp-nvim-lua" };
+            { "hrsh6th/cmp-nvim-lua" };
             { "ray-x/cmp-treesitter" };
             { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" };
         };
     };
+
+    { "williamboman/mason.nvim", lazy = false, config = function() require('mason').setup() end };
+    
+    "williamboman/mason-lspconfig.nvim";
+    "neovim/nvim-lspconfig";
+  
+    { "mfussenegger/nvim-dap", lazy = false };
+    "jay-babu/mason-nvim-dap.nvim";
+    { "rcarriga/nvim-dap-ui", config = function() require('dapui').setup({}) end };
 }
