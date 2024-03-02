@@ -18,5 +18,18 @@ return {
 
     { "lewis6991/gitsigns.nvim" };
 
-    { "kkoomen/vim-doge", run = ":call doge#install()" }
+    { "kkoomen/vim-doge", run = ":call doge#install()" };
+
+    {
+        "hrsh7th/nvim-cmp";
+        dependencies = {
+            { "hrsh7th/cmp-buffer" };
+            { "hrsh7th/cmp-path" };
+            { "saadparwaiz1/cmp_luasnip" };
+            { "hrsh7th/cmp-nvim-lsp" };
+            { "hrsh7th/cmp-nvim-lua" };
+            { "ray-x/cmp-treesitter" };
+            { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" };
+        };
+    };
 }
