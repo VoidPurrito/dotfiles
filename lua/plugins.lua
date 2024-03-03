@@ -3,7 +3,7 @@ return {
     { "folke/lazy.nvim" };
 
     -- telescope:
-    { "nvim-telescope/telescope.nvim", tag = "0.", dependencies = { "nvim-lua/plenary.nvim" }, lzy = false};
+    { "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" }, lzy = false};
 
     -- treesitter
     { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", event = { "BufReadPre", "BufNewFile" }, lazy = false };
@@ -35,7 +35,7 @@ return {
             { "hrsh7th/cmp-path" };
             { "saadparwaiz1/cmp_luasnip" };
             { "hrsh7th/cmp-nvim-lsp" };
-            { "hrsh6th/cmp-nvim-lua" };
+            { "hrsh7th/cmp-nvim-lua" };
             { "ray-x/cmp-treesitter" };
             { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" };
         };
