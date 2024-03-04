@@ -55,6 +55,7 @@ function remove_bookmark(opts)
 end
 
 function goto_bookmark(opts)
+    api.tree.open()
     api.tree.change_root(vim.g.my_bookmarks[opts.fargs[1]]);
 end
 
@@ -103,8 +104,6 @@ local function handle_on_attach(bufnr)
     -- custom mappings
     vim.keymap.set('n', '<C-e>', api.tree.close, opts('Close'))
     vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
-
-    load_bookmarks();
 end
 
 -- optionally enable 24-bit colour
@@ -115,18 +114,55 @@ require("nvim-tree").setup({
     sort = {
         sorter = "case_sensitive";
     };
-    
+
     view = {
         width = 50;
     };
-    
+
     renderer = {
         group_empty = true;
     };
-    
+
     filters = {
         dotfiles = true;
     };
 
     on_attach = handle_on_attach;
 })
+
+function open_on_startup()
+     api.tree.open();
+     load_bookmarks();
+
+     -- Focus the file buffer is a file was opened withe nvim command.
+     -- Otherwise keep focus on the Tree view
+     if next(vim.fn.argv()) ~= nil then
+         vim.cmd("wincmd p");
+     end
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_on_startup });
+
+-- auto close
+--[[local function is_modified_buffer_open(buffers)
+    for _, v in pairs(buffers) do
+        if v.name:match("NvimTree_") == nil then
+            return true
+        end
+    end
+    return false
+end
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    nested = true,
+    callback = function()
+        if
+            #vim.api.nvim_list_wins() == 1
+            and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil
+            and is_modified_buffer_open(vim.fn.getbufinfo({ bufmodified = 1 })) == false
+        then
+            vim.cmd("quit")
+        end
+    end,
+})]]--
+
