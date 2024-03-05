@@ -1,5 +1,5 @@
-local lib = require("nvim-tree.lib")
 local api = require("nvim-tree.api")
+local lib = require("nvim-tree.lib")
 
 function get_cache_file_path()
     return vim.fn.stdpath("cache") .. "/my_bookmarks.cache";
@@ -84,26 +84,19 @@ function bookmarks_completion(A, L, P)
     return keyset;
 end
 
-vim.api.nvim_create_user_command("BookmarkAdd", function(opts) add_bookmark(opts) end, { desc = "Add a Bookmark", nargs = 1 })
-vim.api.nvim_create_user_command("BookmarkRemove", function(opts) remove_bookmark(opts) end, { desc = "Remove a Bookmark", nargs = 1 });
-vim.api.nvim_create_user_command("BookmarkGoto", function(opts) goto_bookmark(opts) end, { desc = "Open Bookmark", nargs = 1, complete = function(A, L, P) return bookmarks_completion(A, L, P) end });
-vim.api.nvim_create_user_command("BookmarkLoad", function(opts) load_bookmarks() end, { desc = "Load Bookmarks from disk" });
-vim.api.nvim_create_user_command("BookmarkSave", function(opts) save_bookmarks() end, { desc = "Save Bookmarks to disk" });
-vim.api.nvim_create_user_command("BookmarkList", function(opts) list_bookmarks() end, { desc = "List Bookmarks" });
-
 local function handle_on_attach(bufnr)
-    local api = require "nvim-tree.api"
+    local api = require "nvim-tree.api";
 
     local function opts(desc)
-        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true };
     end
 
     -- default mappings
-    api.config.mappings.default_on_attach(bufnr)
+    api.config.mappings.default_on_attach(bufnr);
 
     -- custom mappings
-    vim.keymap.set('n', '<C-e>', api.tree.close, opts('Close'))
-    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
+    vim.keymap.set('n', '<C-e>', api.tree.close, opts('Close'));
+    vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'));
 end
 
 -- optionally enable 24-bit colour
@@ -127,6 +120,13 @@ require("nvim-tree").setup({
         dotfiles = true;
     };
 
+    tab = {
+        sync = {
+            open = true;
+            close = true;
+        };
+    };
+
     on_attach = handle_on_attach;
 })
 
@@ -142,6 +142,20 @@ function open_on_startup()
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_on_startup });
+
+vim.api.nvim_create_user_command("BookmarkAdd", function(opts) add_bookmark(opts) end, { desc = "Add a Bookmark", nargs = 1 })
+vim.api.nvim_create_user_command("BookmarkRemove", function(opts) remove_bookmark(opts) end, { desc = "Remove a Bookmark", nargs = 1 });
+vim.api.nvim_create_user_command("BookmarkGoto", function(opts) goto_bookmark(opts) end, { desc = "Open Bookmark", nargs = 1, complete = function(A, L, P)
+    return bookmarks_completion(A, L, P)
+end });
+vim.api.nvim_create_user_command("BookmarkLoad", function(opts) load_bookmarks() end, { desc = "Load Bookmarks from disk" });
+vim.api.nvim_create_user_command("BookmarkSave", function(opts) save_bookmarks() end, { desc = "Save Bookmarks to disk" });
+vim.api.nvim_create_user_command("BookmarkList", function(opts) list_bookmarks() end, { desc = "List Bookmarks" });
+
+vim.keymap.set("n", "<C-e>", function() vim.cmd("NvimTreeToggle") end, { desc = "Toggle the NvimTree Explorer" });
+vim.keymap.set("n", "<C-b>", ":BookmarkGoto ", { desc = "Quick enter the BookmarkGoto command" });
+
+
 
 -- auto close
 --[[local function is_modified_buffer_open(buffers)
