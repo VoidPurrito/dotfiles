@@ -117,7 +117,18 @@ require("nvim-tree").setup({
     };
 
     filters = {
-        dotfiles = true;
+        dotfiles = false;
+    };
+
+    live_filter = {
+        always_show_folders = false;
+    };
+
+    tab = {
+        sync = {
+            open = true;
+            close = true;
+        };
     };
 
     tab = {
@@ -131,7 +142,7 @@ require("nvim-tree").setup({
 })
 
 function open_on_startup()
-     api.tree.open();
+     --api.tree.toggle({ focus = false });
      load_bookmarks();
 
      -- Focus the file buffer is a file was opened withe nvim command.
@@ -158,7 +169,7 @@ vim.keymap.set("n", "<C-b>", ":BookmarkGoto ", { desc = "Quick enter the Bookmar
 
 
 -- auto close
---[[local function is_modified_buffer_open(buffers)
+local function is_modified_buffer_open(buffers)
     for _, v in pairs(buffers) do
         if v.name:match("NvimTree_") == nil then
             return true
@@ -178,5 +189,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
             vim.cmd("quit")
         end
     end,
-})]]--
-
+})
