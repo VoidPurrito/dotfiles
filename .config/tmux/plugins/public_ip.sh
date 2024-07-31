@@ -1,5 +1,5 @@
 # You can set the global env with the following:
-# export PUBLIC_IP_ADDRESS=$(curl --silent http://checkip.amazonaws.com)
+# export PUBLIC_IP_ADDRESS=$(curl --silent https://checkip.amazonaws.com)
 
 show_public_ip() {
   local index icon color text module
