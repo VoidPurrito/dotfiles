@@ -3,7 +3,7 @@ return {
     { "folke/lazy.nvim" };
 
     -- telescope:
-    { "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim" }, lzy = false};
+    { "nvim-telescope/telescope.nvim", tag = "0.1.5", dependencies = { "nvim-lua/plenary.nvim", "debugloop/telescope-undo.nvim" }, lzy = false};
 
     -- treesitter
     { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", event = { "BufReadPre", "BufNewFile" }, lazy = false };
@@ -20,7 +20,7 @@ return {
     { "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } };
 
     -- nvim-tree - project explorer
-    { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" } };
+    { "nvim-tree/nvim-tree.lua", dependencies = { "nvim-tree/nvim-web-devicons" }, lazy = true };
 
     -- git
     { "lewis6991/gitsigns.nvim" };
@@ -43,7 +43,7 @@ return {
         -- setting the keybinding for LazyGit with 'keys' is recommended in
         -- order to load the plugin when the command is run for the first time
         keys = {
-            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+            { "<leader>git", "<cmd>LazyGit<cr>", desc = "LazyGit" }
         }
     };
 
@@ -93,5 +93,47 @@ return {
 
     {'nvim-telescope/telescope-dap.nvim', dependencies = { 'mfussenegger/nvim-dap' } };
 
-    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} }
+    { "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} };
+
+    -- Fle Structure View
+    {
+        'stevearc/aerial.nvim',
+        opts = {},
+
+        -- Optional dependencies
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-tree/nvim-web-devicons"
+        },
+    };
+
+    -- Telescope File Explorer
+    {
+       "nvim-telescope/telescope-file-browser.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    };
+
+    -- toggleterm
+    { 'akinsho/toggleterm.nvim', version = "*", config = true };
+
+    {
+      "folke/which-key.nvim",
+      event = "VeryLazy",
+      opts = {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      },
+      keys = {
+        {
+          "<leader>?",
+          function()
+            require("which-key").show({ global = false })
+          end,
+          desc = "Buffer Local Keymaps (which-key)",
+        },
+      },
+    };
+
+    { 'stevearc/conform.nvim', opts = {} };
 }
