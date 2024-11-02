@@ -1,0 +1,65 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+
+format = """
+$username$time$kubernetes$directory$fill$status$cmd_duration$nodejs$git_branch$git_commit$git_status
+❯ 
+"""
+
+[username]
+disabled = false
+show_always = true
+style_root = 'bold red'
+style_user = 'bold fg:248'
+format = '[$user @]($style) '
+
+[directory]
+truncation_length = 2 
+truncation_symbol = '…/'
+style = 'bold fg:12'
+format = '[  $path]($style)[$read_only]($read_only_style) '
+
+[kubernetes]
+disabled = false
+style = 'bold fg:13'
+format = '[$symbol$context/$namespace]($style) '
+
+[nodejs]
+disabled = false
+style = 'bold fg:14'
+format = '[$symbol$version]($style) '
+
+[git_branch]
+style = 'bold fg:11'
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[git_commit]
+only_detached = false
+style = 'bold fg:11'
+format = '[on $hash]($style) '
+
+[time]
+disabled = false
+use_12hr = false
+style = 'bold fg:208'
+format = '[󰃰  $time]($style) '
+time_format = '%F %T%.3f'
+
+[fill]
+symbol = ' '
+
+[status]
+style = 'bold fg:9'
+symbol = '🔴 '
+# success_symbol = '🟢 OK'
+format = '[$symbol$common_meaning$signal_name$maybe_int]($style) '
+map_symbol = true
+disabled = false
+
+[cmd_duration]
+min_time = 0
+disabled = false
+style = 'bold fg:255'
+format = '[⧗ $duration]($style) '

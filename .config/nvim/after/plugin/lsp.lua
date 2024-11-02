@@ -38,7 +38,7 @@ masonlsp.setup({
     ensure_installed = {
         'lua_ls',
         'rust_analyzer',
-        'tsserver',
+        'ts_ls',
         'eslint',
         'gopls',
     }
