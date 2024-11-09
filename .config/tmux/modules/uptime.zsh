@@ -1,8 +1,5 @@
 #!/bin/zsh
 
-# You can set the global env with the following:
-# export PUBLIC_IP_ADDRESS=$(curl --silent https://checkip.amazonaws.com)
-
 ICON_UPTIME="󰔟"
 
 function show_uptime() {

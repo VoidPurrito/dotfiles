@@ -14,13 +14,19 @@ function show_local_ip() {
     local ethernet=""
     local platform=$(uname)
 
-    if [[ $platform = "Darwin" ]]; then
-        if [[ $interfaces = "all" || $interfaces = "wifi" ]]; then
+    if [[ $interfaces = "all" || $interfaces = "wifi" ]]; then
+        if [[ $platform = "Darwin" ]]; then
             wifi=$(ipconfig getifaddr en0)
+        elif [[ $platform = "Linux" ]]; then
+            wifi=$(ifconfig | grep wl -A1 | grep inet | xargs | cut -d" " -f2)
         fi
+    fi
         
-        if [[ $interfaces = "all" || $interfaces = "ethernet" ]]; then
+    if [[ $interfaces = "all" || $interfaces = "ethernet" ]]; then
+        if [[ $platform = "Darwin" ]]; then
             ethernet=$(ipconfig getifaddr en1)
+        elif [[ $platform = "Linux" ]]; then
+            ethernet=$(ifconfig | grep en -A1 | grep inet | xargs | cut -d" " -f2)
         fi
     fi
 
@@ -44,10 +50,10 @@ function show_local_ip() {
 
     if [[ -z $output ]]; then
         echo ""
+    else
+        output=$(echo $output | xargs)
+        echo "[$output]"
     fi
-
-    output=$(echo $output | xargs)
-    echo "[$output]"
 }
 
 show_local_ip $1 $2
