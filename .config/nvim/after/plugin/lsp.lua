@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
         vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set({ 'n', 'i' }, '<C-k>', vim.lsp.buf.signature_help, opts)
 
         vim.keymap.set("n", "<F3>", vim.diagnostic.open_float, opts)
         vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, opts)

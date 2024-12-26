@@ -74,6 +74,7 @@ return {
             { "hrsh7th/cmp-nvim-lsp" };
             { "hrsh7th/cmp-nvim-lua" };
             { "ray-x/cmp-treesitter" };
+            { "ray-x/lsp_signature.nvim", events = "VeryLazy", opts = {}, config = function(_, opts) require'lsp_signature'.setup(opts) end },
             { "L3MON4D3/LuaSnip", version = "v2.*", build = "make install_jsregexp" };
         };
     };
